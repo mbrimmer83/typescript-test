@@ -19,7 +19,22 @@ const mainContract = c.router({
     },
     summary: 'Get user by id',
   },
+  createUser: {
+    method: 'POST',
+    path: '/api/user',
+    body: z.object({
+      name: z.string(),
+      email: z.string(),
+    }),
+    responses: {
+      200: z.object({
+        id: z.string(),
+        name: z.string(),
+        email: z.string(),
+      }),
+    },
+    summary: 'Create user',
+  },
 });
 
-export type MainContract = typeof mainContract;
 export default mainContract;

@@ -6,17 +6,13 @@ interface useFriendsByIdProps {
   limit?: number;
 }
 
-const useUserById = ({
+export const useUserById = ({
   userId,
   enabled = true,
-  limit = 20,
 }: useFriendsByIdProps) => {
+  // Response is any
   const response = client.getUserById.useQuery({
     queryKey: [userId],
-    // This is not typed and should be. Inference is broken since switching to pnpm
-    onSuccess: (data) => {
-      console.log(data);
-    },
     initialPageParam: undefined,
     enabled: enabled && !!userId,
   });
@@ -26,4 +22,15 @@ const useUserById = ({
   };
 };
 
-export default useUserById;
+export const useCreateUser = () => {
+  const response = client.createUser.useMutation({
+    // data is any
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
+  return {
+    ...response,
+  };
+};

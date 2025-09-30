@@ -7,4 +7,3 @@ const client = initTsrReactQuery(mainContract, {
 });
 
 export default client;
-export type Client = typeof client;
